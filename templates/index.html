@@ -277,6 +277,21 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		// var myRadarChart=new Chart()
+		var ctx = $('#radarChart');
+		var myRadarChart = new Chart(ctx, {
+				type: 'radar',
+				data: {
+								labels: ["Angry","Glad","Happy","Peaceful","Relax","Depressing","Sad","Annoying"],
+								datasets: [{
+														data: [0,0,0,0,0,0,0,0]
+													}]
+							},
+				options:{
+					legend:{
+						display:false
+					}
+				}
+		});
 		$('#divLoading').hide()
 	})
 		function showLirik(){
@@ -336,9 +351,8 @@
 					for_radar[5]=temp[5]
 					for_radar[6]=temp[4]
 					for_radar[7]=temp[3]
-					var ctx = $('#radarChart');
-					var myRadarChart=null
-					var myRadarChart = new Chart(ctx, {
+					myRadarChart.destroy()
+					myRadarChart = new Chart(ctx, {
 					    type: 'radar',
 					    data: {
 									    labels: ["Angry","Glad","Happy","Peaceful","Relax","Depressing","Sad","Annoying"],
