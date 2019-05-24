@@ -18,7 +18,7 @@ MarkupSafe==1.1.1
 nltk==3.4.1
 numpy==1.16.3
 pandas==0.24.2
-python-dateutil==2.5
+python-dateutil==2.5.0
 pytz==2019.1
 requests==2.22.0
 s3transfer==0.2.0
