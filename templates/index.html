@@ -275,10 +275,12 @@
 
 	<script src="static/min/jquery.sweet-modal.min.js"></script>
 	<script type="text/javascript">
+	var myRadarChart
+	var ctx
 	$(document).ready(function(){
 		// var myRadarChart=new Chart()
-		var ctx = $('#radarChart');
-		var myRadarChart = new Chart(ctx, {
+		ctx = $('#radarChart');
+		myRadarChart = new Chart(ctx, {
 				type: 'radar',
 				data: {
 								labels: ["Angry","Glad","Happy","Peaceful","Relax","Depressing","Sad","Annoying"],
