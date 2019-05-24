@@ -1,8 +1,6 @@
 from flask import Flask, render_template, request
 import os
 import json
-import nltk
-nltk.download()
 from nltk.tokenize import word_tokenize
 import pandas as pd
 import re
