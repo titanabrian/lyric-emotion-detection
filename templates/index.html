@@ -285,12 +285,15 @@
 				data: {
 								labels: ["Angry","Glad","Happy","Peaceful","Relax","Depressing","Sad","Annoying"],
 								datasets: [{
-														data: [0,0,0,0,0,0,0,0]
+														data: [0,0,0,0,0,0,0,0],
+														backgroundColor: [
+								                'rgba(22, 155, 188, 0.2)',
+								            ],
 													}]
 							},
 				options:{
 					legend:{
-						display:false
+						display:false,
 					}
 				}
 		});
@@ -359,7 +362,10 @@
 					    data: {
 									    labels: ["Angry","Glad","Happy","Peaceful","Relax","Depressing","Sad","Annoying"],
 									    datasets: [{
-									    						data: for_radar
+									    						data: for_radar,
+																	backgroundColor: [
+											                'rgba(22, 155, 188, 0.2)',
+											            ]
 																}]
 										},
 							options:{
