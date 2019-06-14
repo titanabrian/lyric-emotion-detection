@@ -69,13 +69,6 @@
 			<div class="sidebar-wrapper scrollbar scrollbar-inner">
 				<div class="sidebar-content">
 					<ul class="nav nav-primary">
-						<li class="nav-item">
-							<a href="/koleksi">
-								<i class="flaticon-folder"></i>
-								<p>Input Koleksi Lirik</p>
-							</a>
-						</li>
-						<hr>
 						<li class="nav-item active">
 							<a href="/">
 								<i class="flaticon-settings"></i>
@@ -100,6 +93,7 @@
 							</div>
 							<div class="ml-md-auto py-2 py-md-0">
 								<button type="button" class="btn btn-white btn-border btn-round mr-2" name="button" onclick="showLirik()">Pilih Lirik</button>
+								<button type="button" class="btn btn-white btn-border btn-round mr-2" name="button" onclick="showInput()">Input</button>
 							</div>
 						</div>
 					</div>
@@ -123,7 +117,11 @@
 						<div class="col-md-7">
 							<div class="card full-height">
 								<div class="card-body">
-									<ul class="nav nav-pills nav-secondary" id="pills-tab" role="tablist">
+									<div class="tab-pane fade active show" id="pills-1" role="tabpanel" aria-labelledby="pills-1-tab">
+										<h4><strong id="pill-1-judul"></strong></h4>
+										<p id="pill-1-text"></p>
+									</div>
+									<!-- <ul class="nav nav-pills nav-secondary" id="pills-tab" role="tablist">
 										<li class="nav-item submenu">
 											<a class="nav-link active show" href="#pills-1" data-toggle="pill" id="pills-1-tab" role="tab" aria-controls="pill-1" aria-selected="true">Lirik</a>
 										</li>
@@ -139,12 +137,8 @@
 										<li class="nav-item submenu">
 											<a class="nav-link show" href="#pills-5" data-toggle="pill" id="pills-5-tab" role="tab" aria-controls="pill-5" aria-selected="true">BO VA Words</a>
 										</li>
-									</ul>
-									<div class="tab-content mt-2 mb-3" id="pills-tab-content">
-										<div class="tab-pane fade active show" id="pills-1" role="tabpanel" aria-labelledby="pills-1-tab">
-											<h4><strong id="pill-1-judul"></strong></h4>
-											<p id="pill-1-text"></p>
-										</div>
+									</ul> -->
+									<!-- <div class="tab-content mt-2 mb-3" id="pills-tab-content">
 										<div class="tab-pane fade" id="pills-2" role="tabpanel" aria-labelledby="pills-2-tab">
 											<p id="pill-2-text"></p>
 										</div>
@@ -160,7 +154,7 @@
 											<h4><strong id="pill-5-judul2"></strong></h4>
 											<p id="pill-5-bow"></p>
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 						</div>
@@ -171,6 +165,50 @@
 									<div class="row">
 										<div class="col-md-12 d-flex flex-column justify-content-around">
 											<canvas id="radarChart" width="300" height="300"></canvas>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-7">
+							<div class="card full-height">
+								<div class="card-body">
+									<div class="tab-pane fade active show" id="pills-1" role="tabpanel" aria-labelledby="pills-1-tab">
+										<h4><strong id="pill-1-judul"></strong></h4>
+										<p id="pill-1-text"></p>
+									</div>
+									<ul class="nav nav-pills nav-secondary" id="pills-tab" role="tablist">
+										<li class="nav-item submenu">
+											<a class="nav-link show" href="#pills-2" data-toggle="pill" id="pills-2-tab" role="tab" aria-controls="pill-2" aria-selected="true">Tokenisasi</a>
+										</li>
+										<li class="nav-item submenu">
+											<a class="nav-link show" href="#pills-3" data-toggle="pill" id="pills-3-tab" role="tab" aria-controls="pill-3" aria-selected="true">Stopwords</a>
+										</li>
+										<li class="nav-item submenu">
+											<a class="nav-link show" href="#pills-4" data-toggle="pill" id="pills-4-tab" role="tab" aria-controls="pill-4" aria-selected="true">Ekstraksi VA</a>
+										</li>
+										<li class="nav-item submenu">
+											<a class="nav-link show" href="#pills-5" data-toggle="pill" id="pills-5-tab" role="tab" aria-controls="pill-5" aria-selected="true">BO VA Words</a>
+										</li>
+									</ul>
+									<div class="tab-content mt-2 mb-3" id="pills-tab-content">
+										<div class="tab-pane fade" id="pills-2" role="tabpanel" aria-labelledby="pills-2-tab">
+											<p id="pill-2-text"></p>
+										</div>
+										<div class="tab-pane fade" id="pills-3" role="tabpanel" aria-labelledby="pills-3-tab">
+											<p id="pill-3-text"></p>
+										</div>
+										<div class="tab-pane fade" id="pills-4" role="tabpanel" aria-labelledby="pills-4-tab">
+											<p id="pill-4-text"></p>
+										</div>
+										<div class="tab-pane fade" id="pills-5" role="tabpanel" aria-labelledby="pills-5-tab">
+											<h4><strong id="pill-5-judul1"></strong></h4>
+											<p id="pill-5-text"></p>
+											<h4><strong id="pill-5-judul2"></strong></h4>
+											<p id="pill-5-bow"></p>
 										</div>
 									</div>
 								</div>
@@ -193,12 +231,35 @@
 		        <div class="modal-body">
 		          <ol class="list-group list-group-bordered list">
 								{% for item in data.listdir %}
-								<li class="list-group-item"><strong>{{loop.index}} </strong> {{'_'+item}}<button class="btn btn-primary btn-xs" style="margin-left:10px" onclick="proses('{{item}}')">Proses</button></li>
+								<li class="list-group-item"><strong>{{loop.index}} </strong> {{'_'+item}}<button class="btn btn-primary btn-xs" style="margin-left:10px" onclick="proses('{{item}}','pilih')">Proses</button></li>
 								{% endfor %}
 		          </ol>
 		        </div>
 		        <div class="modal-footer">
-		          <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+		          <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+		        </div>
+		      </div>
+
+		    </div>
+		  </div>
+			<!-- END MODAL -->
+
+			<!-- MODAL -->
+			<div class="modal fade" id="inputModal" role="dialog">
+		    <div class="modal-dialog">
+
+		      <!-- Modal content-->
+		      <div class="modal-content">
+		        <div class="modal-header">
+							<h4 class="modal-title">Input Lirik Lagu</h4>
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        </div>
+		        <div class="modal-body">
+							<textarea id="inputan" name="lirik" rows="8" cols="62"></textarea>
+		        </div>
+		        <div class="modal-footer">
+							<button type="button" class="btn btn-primary" onclick="proses('','input')">Proses</button>
+		          <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
 		        </div>
 		      </div>
 
@@ -302,6 +363,10 @@
 		function showLirik(){
 			$('#lirikModal').modal('show')
 		}
+
+		function showInput(){
+			$('#inputModal').modal('show')
+		}
 		function notify (title, msg, type) {
 				var placementFrom = $('#notify_placement_from option:selected').val();
 				var placementAlign = $('#notify_placement_align option:selected').val();
@@ -326,13 +391,18 @@
 					z_index: 2000
 				});
 			}
-		function proses(judul){
+		function proses(judul,type){
 			$('#divLoading').show()
+			if(type=="pilih"){
+				lirik="nothing"
+			}else if(type=="input"){
+				lirik=$('#inputan').val()
+			}
 			$.ajax({
 				method:'POST',
 				dataType:'JSON',
 				url:'/proses',
-				data:{judul:judul},
+				data:{judul:judul,type:type,lirik:lirik},
 				success:(data)=>{
 					$('#pill-1-judul').html(data.judul)
 					$('#pill-1-text').html(data.isi)
@@ -375,6 +445,7 @@
 							}
 					});
 					$('#lirikModal').modal('hide')
+					$('#inputModal').modal('hide')
 					$('#divLoading').hide()
 				},
 				error:(err)=>{

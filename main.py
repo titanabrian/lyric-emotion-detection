@@ -26,18 +26,27 @@ def koleksi():
     'active':'koleksi',
     'listdir':os.listdir('lirik')
     }
-    return render_template('koleksi.html',data=data)
+    # return render_template('koleksi.html',data=data)
+    m=pk.load(open("support/model_lda_20t[100c].pkl","rb"))
+    return json.dumps(m.print_topics()).replace("],", '],<br>')
 
 @app.route('/proses', methods=['GET','POST'])
 def proses():
     if request.method=='POST':
         judul = request.form['judul']
-        if(judul!=''):
-            f_inp=open("lirik/"+judul+'.txt')
-            raw_inp=f_inp.read()
-            isi = raw_inp.replace("\n", '<br>')
-            raw_inp=raw_inp.replace("\n",' ')
-            f_inp.close()
+        lirik = request.form['lirik']
+        type = request.form['type']
+        if(type!=''):
+            if(type=='pilih'):
+                f_inp=open("lirik/"+judul+'.txt')
+                raw_inp=f_inp.read()
+                isi = raw_inp.replace("\n", '<br>')
+                raw_inp=raw_inp.replace("\n",' ')
+                f_inp.close()
+            else:
+                judul="Lirk Lagu Baru"
+                isi=lirik
+                raw_inp=lirik
             token = tokenisasi(raw_inp)
             stopwords_remove=stopwords(token)
             ekstraksi=ekstraksiva(stopwords_remove)
@@ -139,6 +148,14 @@ def prediction(bow):
     data_emosi[5]=data[5]
     data_emosi[6]=max([data[7],data[10],data[14]])
     data_emosi[7]=max([data[8],data[6]])
+    # data_emosi[0]=data[3]+data[9]+data[11]+data[16]
+    # data_emosi[1]=data[1]+data[2]+data[12]+data[18]+data[19]
+    # data_emosi[2]=data[15]
+    # data_emosi[3]=data[0]+data[4]
+    # data_emosi[4]=data[17]+data[13]
+    # data_emosi[5]=data[5]
+    # data_emosi[6]=data[7]+data[10]+data[14]
+    # data_emosi[7]=data[8]+data[6]
     return data_emosi
 
 if __name__ == "__main__":
